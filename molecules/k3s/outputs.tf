@@ -1,5 +1,10 @@
-output "kubeconfig" {
+output "kubeconfigs" {
   sensitive = true
-  value = { for kubeconfig in values(data.remote_file.kubeconfig)
-  : kubeconfig.conn[0].host => replace(kubeconfig.content, "127.0.0.1", kubeconfig.conn[0].host) }
+  value = data.remote_file.kubeconfig["192.168.1.2"].content
+}
+
+resource "local_file" "private_key" {
+    // root output kubeconfig
+    content  = data.remote_file.kubeconfig["192.168.1.2"].content
+    filename = "../../config/kubeconfig"
 }

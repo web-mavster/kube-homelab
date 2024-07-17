@@ -6,8 +6,6 @@ A Kubernetes based setup to run a home server.
 
 I had also created a video where I show how I set the homelab up for my use. 
 
-[<img src="https://user-images.githubusercontent.com/9134050/212525414-02a03a7e-f1f6-4b51-a5a6-c4a49c994f89.png">](https://www.youtube.com/watch?v=LfBcERF6qw4)
-
 ### requirements
 
 - Linux nodes (a VM, Raspberry PI, Tower PC)

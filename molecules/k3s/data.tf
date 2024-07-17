@@ -1,5 +1,6 @@
 data "remote_file" "kubeconfig" {
   for_each = local.servers
+  
   conn {
     host        = each.value.host
     user        = each.value.user
@@ -7,7 +8,8 @@ data "remote_file" "kubeconfig" {
   }
 
   path        = "/home/supermavster/.kube/kubeconfig"
+  
   depends_on  = [
-    ssh_resource.install_k3s
+    ssh_resource.update_dependencies
   ]
 }
