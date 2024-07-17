@@ -143,10 +143,10 @@ resource "ssh_resource" "kernel_boot" {
   user     = each.value.user
   commands = [
     "sudo cp /etc/sysctl.conf /etc/sysctl.conf.bak",
-    "net.bridge.bridge-nf-call-iptables = 1 | sudo tee -a /etc/sysctl.conf",
-    "net.bridge.bridge-nf-call-ip6tables = 1 | sudo tee -a /etc/sysctl.conf",
-    "net.ipv4.ip_forward = 1 | sudo tee -a /etc/sysctl.conf",
-    "net.ipv6.conf.all.forwarding = 1 | sudo tee -a /etc/sysctl.conf",
+    "sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf",
+    "sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/' /etc/sysctl.conf",
+    "echo 'net.bridge.bridge-nf-call-iptables = 1' | sudo tee -a /etc/sysctl.conf",
+    "echo 'net.bridge.bridge-nf-call-ip6tables = 1' | sudo tee -a /etc/sysctl.conf",
     "sudo sysctl -p",
     "sudo cp /boot/firmware/cmdline.txt /boot/firmware/cmdline.txt.bak",
     "sudo sed -i 's/$/ cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1/' /boot/firmware/cmdline.txt"
