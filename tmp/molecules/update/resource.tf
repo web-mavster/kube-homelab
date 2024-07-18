@@ -38,6 +38,18 @@ resource "ssh_resource" "disable_eth0_enable_wlan0" {
   when = "destroy"
 }
 
+# Set 192.168.1.2 as ip static for hostname -I (ifconfig eth0)
+resource "ssh_resource" "set_static_ip" {
+  for_each = local.servers
+  host     = each.value.host
+  user     = each.value.user
+  commands = [
+    "sudo ifconfig eth0 192.168.1.2 netmask 255.255.255.0"
+  ]
+  private_key = file(each.value.private_key)
+  timeout = "10m"
+}
+
 # /etc/dhcpcd.conf
 resource "ssh_resource" "set_static_ip_dhcpcd" {
   for_each = local.servers
@@ -46,7 +58,7 @@ resource "ssh_resource" "set_static_ip_dhcpcd" {
   commands = [
     "sudo cp /etc/dhcpcd.conf /etc/dhcpcd.conf.bak",
     "echo 'interface eth0' | sudo tee -a /etc/dhcpcd.conf",
-    "echo 'static ip_address=$(hostname -I | awk '{print $1}')/24' | sudo tee -a /etc/dhcpcd.conf",
+    "echo 'static ip_address=192.168.1.2/24' | sudo tee -a /etc/dhcpcd.conf",
     "echo 'static routers=$(ip route | awk '/default/ { print $3 }' | sort | uniq | head -n 1)' | sudo tee -a /etc/dhcpcd.conf",
     "echo 'static domain_name_servers=$(grep 'nameserver' /etc/resolv.conf | awk '{print $2}')' | sudo tee -a /etc/dhcpcd.conf"
   ]
@@ -70,7 +82,7 @@ resource "ssh_resource" "restart_dhcpcd" {
   when = "destroy"
 }
 
-resource "ssh_resource" "set_static_ip" {
+resource "ssh_resource" "set_static_connection" {
   for_each = local.servers
   host     = each.value.host
   user     = each.value.user
@@ -102,7 +114,7 @@ resource "ssh_resource" "set_static_ip" {
     permissions = "0644"
   }
   commands = [
-    "sudo set -i 's/IP_ADDRESS/'$(hostname -I | awk '{print $1}')'/g' /etc/netplan/01-netcfg.yaml",
+    "sudo set -i 's/IP_ADDRESS/192.168.1.2/g' /etc/netplan/01-netcfg.yaml",
     "sudo set -i 's/IP_GATEWAY/'$(ip route | awk '/default/ { print $3 }' | sort | uniq | head -n 1)'/g' /etc/netplan/01-netcfg.yaml",
     "sudo set -i 's/DNS1/'$(grep 'nameserver' /etc/resolv.conf | awk '{print $2}')'/g' /etc/netplan/01-netcfg.yaml",
     "sudo netplan --debug try",
