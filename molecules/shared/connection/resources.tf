@@ -15,7 +15,7 @@ resource "ssh_resource" "ssh_excecutor" {
   user     = each.value.user
   commands = local.commands
   private_key = file(each.value.private_key)
-  timeout = "5m"
+  timeout = local.timeout
   retry_delay = "10s"
   when = local.is_destroy
   # if local.file_data is not null, then add the file {} block

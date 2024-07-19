@@ -31,3 +31,9 @@ variable "file_data" {
   default = null
   nullable = true
 }
+
+variable "timeout" {
+  description = "timeout"
+  type = string
+  default = "5m"
+}
