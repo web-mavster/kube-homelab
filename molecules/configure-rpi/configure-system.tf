@@ -55,7 +55,7 @@ module "configure_eth0_file" {
 module "restore_eth0_file" {
   source     = "../shared/connection"
   servers    = var.servers
-  is_destroy = false
+  is_destroy = true
   commands = [
     "sudo rm -rf /etc/netplan/*",
     "sudo mv /etc/netplan.bk/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml",
