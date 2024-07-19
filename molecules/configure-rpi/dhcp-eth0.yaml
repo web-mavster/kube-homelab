@@ -1,5 +1,6 @@
 network:
   version: 2
+  renderer: networkd
   wifis:
     renderer: networkd
     wlan0:
@@ -10,6 +11,7 @@ network:
       optional: true
   ethernets:
     eth0:
+      dhcp4: false
       addresses:
         - IP_ADDRESS/24
       gateway4: IP_GATEWAY
@@ -17,4 +19,3 @@ network:
         addresses:
           - DNS1
       optional: true
-      dhcp4: false

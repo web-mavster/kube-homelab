@@ -46,9 +46,10 @@ module "configure_eth0_file" {
     "sudo sed -i 's/IP_ADDRESS/192.168.1.2/g' /etc/netplan/50-cloud-init.yaml",
     "router_ip=$(ip route | awk '/default/ { print $3 }' | sort | uniq | head -n 1); sudo sed -i \"s/IP_GATEWAY/$router_ip/g\" /etc/netplan/50-cloud-init.yaml",
     "dns_ip=$(grep 'nameserver' /etc/resolv.conf | awk '{print $2}'); sudo sed -i \"s/DNS1/$dns_ip/g\" /etc/netplan/50-cloud-init.yaml",
-    "sudo netplan --debug try",
-    "sudo netplan --debug generate",
+    # "sudo netplan --debug try",
+    # "sudo netplan --debug generate",
     "sudo netplan --debug apply",
+    "sudo ip link set wlan0 down"
   ]
 }
 
@@ -60,8 +61,9 @@ module "restore_eth0_file" {
     "sudo rm -rf /etc/netplan/*",
     "sudo mv /etc/netplan.bk/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml",
     "sudo rm -rf /etc/netplan.bk",
-    "sudo netplan --debug try",
-    "sudo netplan --debug generate",
+    # "sudo netplan --debug try",
+    # "sudo netplan --debug generate",
+    "sudo ip link set wlan0 up",
     "sudo netplan --debug apply",
   ]
 }
