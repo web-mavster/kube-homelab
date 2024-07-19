@@ -11,7 +11,7 @@ terraform {
 
 resource "ssh_resource" "ssh_excecutor" {
   for_each = local.servers
-  host     = each.value.ip_static
+  host     = each.value.host
   user     = each.value.user
   commands = local.commands
   private_key = file(each.value.private_key)

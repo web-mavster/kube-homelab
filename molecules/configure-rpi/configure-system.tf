@@ -1,5 +1,5 @@
 module "enable_eth0_disable_wlan0" {
-  source  = "../shared/connection"
+  source  = "../shared/connection-init"
   servers = var.servers
   commands = [
     "sudo ip link set eth0 up",
@@ -15,7 +15,7 @@ module "enable_eth0_disable_wlan0" {
 }
 
 module "disable_eth0_enable_wlan0" {
-  source  = "../shared/connection"
+  source  = "../shared/connection-init"
   servers = var.servers
   commands = [
     "sudo ip link set eth0 down",
@@ -30,7 +30,7 @@ module "disable_eth0_enable_wlan0" {
 
 
 module "configure_eth0_file" {
-  source     = "../shared/connection"
+  source     = "../shared/connection-init"
   servers    = var.servers
   is_destroy = false
   file_data = {
@@ -54,7 +54,7 @@ module "configure_eth0_file" {
 }
 
 module "restore_eth0_file" {
-  source     = "../shared/connection"
+  source     = "../shared/connection-init"
   servers    = var.servers
   is_destroy = true
   commands = [
