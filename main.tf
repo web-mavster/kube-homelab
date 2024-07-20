@@ -32,3 +32,14 @@ module "install-kubernetes" {
     source = "./molecules/cluster/configuration/microk8s"
     servers = var.servers
 }
+
+module "install-apps" {
+    source = "./molecules/cluster/resources"
+    base = var.base
+    namespaces = var.namespaces
+    per_environment_configuration = var.per_environment_configuration
+    databases = var.databases
+    cluster = var.cluster
+    ingresses = var.ingresses
+    externals = var.externals
+}
