@@ -5,17 +5,20 @@ network:
     renderer: networkd
     wlan0:
       access-points:
-        NAZGUL_REY_PLUS:
-          password: 02f94c39b9132a19d4c7375860e9010aeaa0f31beddc905ff89964a513f3d998
+        Supermavs:
+          password: ab53952c6e4cede4229695dd26641e160b6a70bb78a347fb61420a9b43e5fd52
       dhcp4: true
       optional: true
   ethernets:
     eth0:
       dhcp4: false
+      optional: true
       addresses:
         - IP_ADDRESS/24
-      gateway4: IP_GATEWAY
-      nameservers:
-        addresses:
-          - DNS1
-      optional: true
+      # ROUTER ONLY:
+      # gateway4: IP_GATEWAY
+      # nameservers:
+      #   addresses:
+      #     # - DNS1
+      #     - 8.8.8.8
+      #     - 8.8.4.4
