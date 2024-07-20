@@ -10,7 +10,7 @@ terraform {
 data "remote_file" "kubeconfig" {
   for_each = local.servers
   conn {
-    host        = each.value.host
+    host        = each.value.ip_static
     user        = each.value.user
     private_key = file(each.value.private_key)
   }
