@@ -15,20 +15,20 @@ terraform {
 provider "time" {}
 
 
-## ENABLE host with the IP NORMAL (DHCP) and DISABLE if the STATIC IP is set
+# # ENABLE host with the IP NORMAL (DHCP) and DISABLE if the STATIC IP is set
 # Configure raspberry (System & Network) 
 # module "configure-system" {
-#     source = "./molecules/configure-rpi"
+#     source = "./molecules/cluster/configuration/configure-rpi"
 #     servers = var.servers
 # }
 
 # Start of the modules
 module "update-system" {
-    source = "./molecules/update"
+    source = "./molecules/cluster/configuration/update"
     servers = var.servers
 }
 
 module "install-kubernetes" {
-    source = "./molecules/microk8s"
+    source = "./molecules/cluster/configuration/microk8s"
     servers = var.servers
 }

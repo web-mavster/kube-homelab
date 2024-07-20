@@ -14,7 +14,7 @@ data "remote_file" "kubeconfig" {
     user        = each.value.user
     private_key = file(each.value.private_key)
   }
-
+  # PATH IN THE RASPBERRY
   path        = "/home/supermavster/.kube/kubeconfig"
   depends_on  = [
     module.install_microk8s
