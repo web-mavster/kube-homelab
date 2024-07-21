@@ -18,3 +18,8 @@ hosts:
 %{ for host in hosts ~}
 - name: ${host}
 %{ endfor ~}
+
+# Do it Manual: CONFIGMAP
+#name: argocd-cmd-params-cm
+#data:
+#  server.insecure: "true"
