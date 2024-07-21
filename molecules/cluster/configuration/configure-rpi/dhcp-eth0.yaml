@@ -15,10 +15,9 @@ network:
       optional: true
       addresses:
         - IP_ADDRESS/24
-      # ROUTER ONLY:
-      # gateway4: IP_GATEWAY
-      # nameservers:
-      #   addresses:
-      #     # - DNS1
-      #     - 8.8.8.8
-      #     - 8.8.4.4
+      gateway4: IP_GATEWAY
+      nameservers:
+        addresses:
+          # - DNS1
+          - 8.8.8.8
+          - 8.8.4.4

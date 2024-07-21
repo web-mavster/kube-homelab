@@ -8,7 +8,7 @@ fullnameOverride: ""
 
 ## set kubernetes cluster domain where minio is running
 ##
-clusterDomain: 192.168.0.100.nip.io
+clusterDomain: 192.168.1.240.nip.io
 
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
 ##

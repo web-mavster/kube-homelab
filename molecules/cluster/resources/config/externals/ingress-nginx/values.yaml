@@ -18,7 +18,7 @@ commonLabels: {}
 controller:
   name: controller
   nodeSelector:
-    kubernetes.io/hostname: pi
+    kubernetes.io/hostname: raspberrypi
   enableAnnotationValidations: false
   image:
     ## Keep false as default for now!
@@ -256,7 +256,7 @@ controller:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - pi
+          - raspberrypi
   # # An example of preferred pod anti-affinity, weight is in the range 1-100
   # podAntiAffinity:
   #   preferredDuringSchedulingIgnoredDuringExecution:
@@ -326,7 +326,7 @@ controller:
   ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
   ##
   nodeSelector:
-    kubernetes.io/hostname: pi
+    kubernetes.io/hostname: raspberrypi
   ## Liveness and readiness probe values
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
   ##
@@ -823,7 +823,7 @@ controller:
         # -- Enable 'networkPolicy' or not
         enabled: false
       nodeSelector:
-        kubernetes.io/hostname: pi
+        kubernetes.io/hostname: raspberrypi
       tolerations: []
       # -- Labels to be added to patch job resources
       labels: {}
@@ -1038,7 +1038,7 @@ defaultBackend:
   ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
   ##
   nodeSelector:
-    kubernetes.io/hostname: pi
+    kubernetes.io/hostname: raspberrypi
   # -- Annotations to be added to default backend pods
   ##
   podAnnotations: {}

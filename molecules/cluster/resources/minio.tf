@@ -1,6 +1,6 @@
 resource "helm_release" "app_data_minio" {
   name       = "homelab-app-data-minio"
-  chart      = "./lib/helm-chart-openebs-persistence"
+  chart      = "./molecules/cluster/resources/lib/helm-chart-openebs-persistence"
   namespace  = "homelab"
   wait = false
 
@@ -11,7 +11,7 @@ resource "helm_release" "app_data_minio" {
     pv:
       enabled: true
       name: pv-homelab-app-data-minio
-      path: /homelab/drives/drive-2tb-1/app-data/minio
+      path: /mnt/disk/app-data/minio
       accessModes:
         - ReadWriteMany
       nodeAffinity:
@@ -21,7 +21,7 @@ resource "helm_release" "app_data_minio" {
             - key: kubernetes.io/hostname
               operator: In
               values:
-              - pi
+              - raspberrypi
     pvc:
       enabled: true
       name: pvc-homelab-app-data-minio
